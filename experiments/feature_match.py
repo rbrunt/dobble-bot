@@ -5,21 +5,23 @@ from matplotlib import pyplot as plt
 MIN_MATCH_COUNT = 10
 
 def dowork():
-    img = cv2.imread('../img/three-cards.jpg', 0)
+    #img = cv2.imread('../img/three-cards.jpg', 0)
+    img = cv2.imread('../img/test-2.jpg', 0)
     img = cv2.resize(img, (0, 0), fx=0.25, fy=0.25)
     img_orig = img.copy()
 
-    template = cv2.imread('../img/patterns/moon.jpg', 0)
+    #template = cv2.imread('../img/patterns/moon.jpg', 0)
+    template = cv2.imread('../img/patterns/dinosaur.jpg', 0)
     #template = cv2.resize(template, (0, 0), fx=0.25, fy=0.25)
     
-    img1 = img.copy()
-    img2 = template.copy()
+    scene = img.copy()
+    symbol = template.copy()
 
     sift = cv2.xfeatures2d.SIFT_create()
 
 
-    kp1, des1 = sift.detectAndCompute(img1, None)
-    kp2, des2 = sift.detectAndCompute(img2, None)
+    kp1, des1 = sift.detectAndCompute(symbol, None)
+    kp2, des2 = sift.detectAndCompute(scene, None)
 
     FLANN_INDEX_KDTREE = 0
     index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
@@ -41,11 +43,11 @@ def dowork():
         M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
         matchesMask = mask.ravel().tolist()
 
-        h,w = img1.shape
+        h,w = symbol.shape
         pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)
         dst = cv2.perspectiveTransform(pts, M)
 
-        img2 = cv2.polylines(img2, [np.int32(dst)], True, 255, 3, cv2.LINE_AA)
+        scene = cv2.polylines(scene, [np.int32(dst)], True, 255, 3, cv2.LINE_AA)
     else:
         print "not enough good matches"
         matchesMask = None
@@ -55,7 +57,7 @@ def dowork():
                    matchesMask = matchesMask, # draw only inliers
                    flags = 2)
 
-    img3 = cv2.drawMatches(img1,kp1,img2,kp2,good,None,**draw_params)
+    img3 = cv2.drawMatches(symbol,kp1,scene,kp2,good,None,**draw_params)
 
     plt.imshow(img3, 'gray'),plt.show()
 
