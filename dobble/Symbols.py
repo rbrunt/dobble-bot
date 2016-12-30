@@ -21,7 +21,7 @@ class Symbol(object):
         path = 'img/patterns/' + filename + '.jpg'
         return path
 
-
+# Define a constnat for each possible dobble symbol
 ANCHOR = Symbol("Anchor")
 APPLE = Symbol("Apple")
 BIRD = Symbol("Bird")
@@ -42,7 +42,7 @@ DOG = Symbol("Dog")
 DOLPHIN = Symbol("Dolphin")
 DRAGON = Symbol("Dragon")
 DROP = Symbol("Drop")
-EXCLAMATION_MARK = Symbol("Exclaimation Mark")
+EXCLAMATION_MARK = Symbol("Exclamation Mark")
 EYE = Symbol("Eye")
 FIRE = Symbol("Fire")
 FLOWER = Symbol("Flower")
@@ -79,3 +79,5 @@ TREBLE_CLEF = Symbol("Treble Clef", "Music")
 TREE = Symbol("Tree")
 YIN_YANG = Symbol("Yin Yang")
 ZEBRA = Symbol("Zebra")
+
+ALL_SYMBOLS = [ANCHOR, APPLE, BIRD, BOMB, BOTTLE, CACTUS, CANDLE, CARROT, CAT, CHEESE, CLOCK, CLOVER, CLOWN, COBWEB, DINOSAUR, DOBBLE, DOG, DOLPHIN, DRAGON, DROP, EXCLAMATION_MARK, EYE, FIRE, FLOWER, GHOST, HAMMER, HEART, ICE_CUBE, IGLOO, KEY, KNIGHT, LADYBIRD, LIGHTBULB, LIGHTNING, LIPS, MAN, MAPLE_LEAF, MOON, NO_ENTRY, PADLOCK, PENCIL, QUESTION_MARK, SCISSORS, SKULL, SNOWFLAKE, SNOWMAN, SPIDER, SPLATS, SUN, SUNGLASSES, TARGET, TAXI, TORTOISE, TREBLE_CLEF, TREE, YIN_YANG, ZEBRA]
